@@ -130,9 +130,11 @@ void Camera::RecalculateRayDirections()
 	{
 		for (uint32_t x = 0; x < m_ViewportWidth; x++)
 		{
+			//map the coord from [0, m_Viewport] 2 [0, 1]
 			glm::vec2 coord = { (float)x / (float)m_ViewportWidth, (float)y / (float)m_ViewportHeight };
 			coord = coord * 2.0f - 1.0f; // -1 -> 1
 
+			//screen coord 2 world coord
 			glm::vec4 target = m_InverseProjection * glm::vec4(coord.x, coord.y, 1, 1);
 			glm::vec3 rayDirection = glm::vec3(m_InverseView * glm::vec4(glm::normalize(glm::vec3(target) / target.w), 0));
 			m_RayDirections[x + y * m_ViewportWidth] = rayDirection;

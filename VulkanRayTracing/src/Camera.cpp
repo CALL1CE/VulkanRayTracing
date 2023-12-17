@@ -15,7 +15,7 @@ Camera::Camera(float verticalFOV, float nearClip, float farClip)
 	m_Position = glm::vec3(0, 0, 6);
 }
 
-void Camera::OnUpadte(float ts)
+bool Camera::OnUpadte(float ts)
 {
 	glm::vec2 mousePos = Input::GetMousePosition();
 	glm::vec2 delta = (mousePos - m_LastMousePosition) * 0.002f;
@@ -24,7 +24,7 @@ void Camera::OnUpadte(float ts)
 	if (!Input::IsMouseButtonDown(MouseButton::Right))
 	{
 		Input::SetCursorMode(CursorMode::Normal);
-		return;
+		return false;
 	}
 
 	//if click mouse right
@@ -91,6 +91,7 @@ void Camera::OnUpadte(float ts)
 		RecalculateView();
 		RecalculateRayDirections();
 	}
+	return moved;
 }
 
 void Camera::OnResize(uint32_t width, uint32_t height)

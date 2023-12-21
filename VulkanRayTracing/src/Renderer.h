@@ -14,6 +14,7 @@ public:
 	struct Settings
 	{
 		bool Accumulate = true;
+		bool SkyLight = true;
 	};
 public:
 	Renderer() = default;
